@@ -27,20 +27,11 @@ jobs:
           channel: 'stable'
           cache: true
 
-      - name: Print Flutter version
-        run: flutter --version
-
       - name: Generate android/local.properties
         run: |
-          FLUTTER_ROOT="$(dirname "$(dirname "$(readlink -f "$(which flutter)")")")"
-          {
-            echo "sdk.dir=$ANDROID_SDK_ROOT"
-            echo "flutter.sdk=$FLUTTER_ROOT"
-            echo "flutter.buildMode=release"
-            echo "flutter.versionName=1.0.0"
-            echo "flutter.versionCode=1"
-          } > android/local.properties
-          echo "=== android/local.properties ==="
+          echo "sdk.dir=${ANDROID_SDK_ROOT}" > android/local.properties
+          echo "flutter.sdk=${FLUTTER_ROOT}" >> android/local.properties
+          echo "=== local.properties ==="
           cat android/local.properties
 
       - name: Get dependencies
